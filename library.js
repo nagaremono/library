@@ -9,6 +9,14 @@ function Book(title, author, pages, haveRead) {
   this.haveRead = haveRead;
 }
 
+Book.prototype.toggleRead = function () {
+  if (this.haveRead === "Read") {
+    this.haveRead = "Have not read"
+  } else {
+    this.haveRead = "Read"
+  }
+}
+
 function addBookToLibrary() {
   let title = document.getElementById('title').value
   let author = document.getElementById('author').value
@@ -35,9 +43,11 @@ function render() {
     row.appendChild(rowHeader)
   
     for (let key in book) {
-      let bookDetail = document.createElement('td')
-      bookDetail.textContent = book[key]
-      row.appendChild(bookDetail)
+      if (book.hasOwnProperty(key)) {
+        let bookDetail = document.createElement('td')
+        bookDetail.textContent = book[key]
+        row.appendChild(bookDetail)
+      }
     }
     
     let removeColumn = document.createElement('td')
@@ -53,9 +63,21 @@ function render() {
     removeColumn.appendChild(removeButton)
     row.appendChild(removeColumn)
 
+    let toggleReadColumn = document.createElement('td')
+    let toggleReadButton = document.createElement('button')
+    toggleReadButton.textContent = 'Change read status'
+    toggleReadButton.setAttribute("class", "toggleread")
+    toggleReadButton.addEventListener('click', () => {
+      let libraryIndex = row.getAttribute("data-book-number")
+      library[libraryIndex].toggleRead()
+      render()
+    })
+
+    toggleReadColumn.appendChild(toggleReadButton)
+    row.appendChild(toggleReadColumn)
+    
     tableBody.appendChild(row)
   })
-
 }
 
 document.querySelector('#addbook').addEventListener('click', addBookToLibrary)
