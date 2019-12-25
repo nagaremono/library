@@ -22,6 +22,47 @@
       <tbody>
       </tbody>
     </table>
+    <button type="button" class="btn btn-dark" id="newbook">New Book</button>
+    <form>
+      <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Book Title</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="title">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="author" class="col-sm-2 col-form-label">Book Author</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="author">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="pages" class="col-sm-2 col-form-label">Number pf Pages</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="pages">
+        </div>
+      </div>
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Have Read</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="haveRead" id="Read" value="Read" checked>
+              <label class="form-check-label" for="gridRadios1">
+                Read
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="haveRead" id="havenotread" value="Have not read">
+              <label class="form-check-label" for="gridRadios2">
+                Have not read
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>      
+    </form>
+    <button class="btn btn-primary" id="addbook">Add Book</button>
     <script src="library.js"></script>
   </body>
 </html>

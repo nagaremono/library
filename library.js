@@ -9,11 +9,15 @@ function Book(title, author, pages, haveRead) {
   this.haveRead = haveRead;
 }
 
-MakeBook.prototype.info = function() {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.haveRead}`
-}
-
-function addBookToLibrary(title, author, pages, haveRead) {
+function addBookToLibrary() {
+  let title = document.getElementById('title').value
+  let author = document.getElementById('author').value
+  let pages = document.getElementById('pages').value
+  
+  let haveRead = document.getElementsByName('haveRead')
+  if (haveRead[0].checked) haveRead = haveRead[0].value
+  else haveRead = haveRead[1].value
+  
   let newBook = new Book(title, author, pages, haveRead)
   library.push(newBook)
 }
@@ -25,12 +29,12 @@ function render() {
     
     let rowHeader = document.createElement('th')
     rowHeader.setAttribute("scope", "row")
-    rowHeader.textContent(`${bookNumber + 1}`)
+    rowHeader.textContent = `${bookNumber + 1}`
     row.appendChild(rowHeader)
-
-    for (key in book) {
+  
+    for (let key in book) {
       let bookDetail = document.createElement('td')
-      bookDetail.textContent(book.key)
+      bookDetail.textContent = book[key]
       row.appendChild(bookDetail)
     }
     
@@ -38,3 +42,20 @@ function render() {
   })
 }
 
+document.querySelector('#addbook').addEventListener('click', addBookToLibrary)
+document.querySelector('#addbook').addEventListener('click', render)
+document.querySelector('#newbook').addEventListener('click', () => {
+  let form = document.querySelector('form')
+  if (form.style.display === "none") {
+    form.style.display = "block"
+  } else {
+    form.style.display = "none"
+  }
+
+  let button = document.querySelector('#addbook')
+  if (button.style.display === "none") {
+    button.style.display = "block"
+  } else {
+    button.style.display = "none"
+  }
+})
