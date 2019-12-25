@@ -22,5 +22,23 @@ function addBookToLibrary() {
   library.push(newBook)
 }
 
+function render() {
+  let tableBody = document.querySelector('tbody')
+  library.forEach((book, bookNumber) => {
+    let row = document.createElement('tr')
+    
+    let rowHeader = document.createElement('th')
+    rowHeader.setAttribute("scope", "row")
+    rowHeader.textContent(`${bookNumber + 1}`)
+    row.appendChild(rowHeader)
 
+    for (key in book) {
+      let bookDetail = document.createElement('td')
+      bookDetail.textContent(book.key)
+      row.appendChild(bookDetail)
+    }
+    
+    tableBody.appendChild(row)
+  })
+}
 
