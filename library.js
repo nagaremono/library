@@ -24,8 +24,10 @@ function addBookToLibrary() {
 
 function render() {
   let tableBody = document.querySelector('tbody')
+  tableBody.innerHTML = ''
   library.forEach((book, bookNumber) => {
     let row = document.createElement('tr')
+    row.setAttribute("data-book-number", bookNumber)
     
     let rowHeader = document.createElement('th')
     rowHeader.setAttribute("scope", "row")
@@ -38,8 +40,22 @@ function render() {
       row.appendChild(bookDetail)
     }
     
+    let removeColumn = document.createElement('td')
+    let removeButton = document.createElement('button')
+    removeButton.textContent = 'Remove'
+    removeButton.setAttribute("class", "remove")
+    removeButton.addEventListener('click', () => {
+      let libraryIndex = row.getAttribute("data-book-number")
+      library.splice(libraryIndex, 1)
+      render()
+    })
+
+    removeColumn.appendChild(removeButton)
+    row.appendChild(removeColumn)
+
     tableBody.appendChild(row)
   })
+
 }
 
 document.querySelector('#addbook').addEventListener('click', addBookToLibrary)
